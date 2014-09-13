@@ -1,0 +1,22 @@
+<li>
+  <h3> <% = menu_item[:name] %>
+  <p> <% = menu_item[:description] %>
+  <p> <% = menu_item[:price] %>
+  <p> Admin Options:
+
+<form action='/<%= menu_item.id %>' method='POST'>
+  <p>
+    <% if menu_item.id %>
+      Edit Item:
+    <% else %>
+      Menu Items:
+    <% end %>
+  </p>
+  <% if menu_item.id %>
+    <input type="hidden" name="_method" value="PUT" />
+  <% end %>
+  Menu Item Name:<input type='text' name='menu_item[name]' value="<%= menu_item.name %>"/><br/>
+  Description:</br><textarea name='menu_item[description]'><%= menu_item.description %></textarea><br/>
+  Menu Item Price:<input type='text' name='menu_item[price]' value="<%=menu_item.price %>"/><br/>
+  <input type='submit'/>
+</form>
