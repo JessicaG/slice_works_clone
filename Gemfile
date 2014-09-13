@@ -7,7 +7,7 @@ gem 'sinatra', require: 'sinatra/base'
 
 group :test do
   gem "rspec"
-  gem "capybara", "2.1.0"
+  gem "capybara"
   gem 'launchy'
   gem 'database_cleaner'
 end

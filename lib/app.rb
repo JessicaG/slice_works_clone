@@ -4,10 +4,12 @@ class SliceWorksApp < Sinatra::Base
   set :method_override, true
   set :root, 'lib/app'
   set :public_folder, 'public'
+  set :views, settings.root + '/views'
 
 
   get '/' do
-    erb :index
+    # 'Eat. Drink. Relax'
+    erb :home
   end
 
   not_found do
