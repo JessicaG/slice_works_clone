@@ -436,7 +436,7 @@ ins {
 }
 
 hr {
-	background: url(../images/dotted-line.png) repeat center top;
+	background: url('../images/dotted-line.png') repeat center top;
 	background-size: 4px 4px;
 	border: 0;
 	height: 1px;
@@ -1624,7 +1624,7 @@ footer.entry-meta {
 
 .format-status .entry-content:before,
 .format-status .entry-meta:before {
-	background: url(images/dotted-line.png) repeat-y left bottom;
+	background: url(../images/dotted-line.png) repeat-y left bottom;
 	background-size: 4px 4px;
 	content: "";
 	display: block;
