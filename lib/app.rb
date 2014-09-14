@@ -4,6 +4,8 @@ class SliceWorksApp < Sinatra::Base
   set :method_override, true
   set :root, 'lib/app'
   set :public_folder, 'public'
+  set :public_folder, File.dirname(__FILE__) + '/public'
+
 
   Tilt.register Tilt::ERBTemplate, 'html.erb'
 
@@ -12,7 +14,7 @@ class SliceWorksApp < Sinatra::Base
   end
 
   not_found do
-    erb :error
+    haml :error
   end
 
 end
