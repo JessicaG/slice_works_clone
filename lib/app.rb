@@ -5,9 +5,10 @@ class SliceWorksApp < Sinatra::Base
   set :root, 'lib/app'
   set :public_folder, 'public'
 
+  Tilt.register Tilt::ERBTemplate, 'html.erb'
 
   get '/' do
-    erb :index
+    erb :home
   end
 
   not_found do
