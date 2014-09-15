@@ -1,11 +1,12 @@
 source 'https://rubygems.org'
 
-gem 'pry'
 gem 'bootstrap-sass', '~> 3.2.0'
 gem 'paperclip', '~> 4.2'
 gem 'sinatra', require: 'sinatra/base'
+gem 'haml'
 
 group :test do
+  gem 'pry'
   gem "rspec"
   gem "capybara"
   gem 'launchy'
@@ -13,5 +14,6 @@ group :test do
 end
 
 group :development do
+  gem 'pry'
   gem 'shotgun'
 end

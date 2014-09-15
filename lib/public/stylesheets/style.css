@@ -436,7 +436,7 @@ ins {
 }
 
 hr {
-	background: url(images/dotted-line.png) repeat center top;
+	background: url('../images/dotted-line.png') repeat center top;
 	background-size: 4px 4px;
 	border: 0;
 	height: 1px;
@@ -896,7 +896,7 @@ ul.nav-menu li:hover > ul,
 
 .site-header .search-field {
 	background-color: transparent;
-	background-image: url(images/search-icon.png);
+	background-image: url(../images/search-icon.png);
 	background-position: 5px center;
 	background-repeat: no-repeat;
 	background-size: 24px 24px;
@@ -1419,7 +1419,7 @@ footer.entry-meta {
 }
 
 .format-audio .audio-content {
-	background: url(images/dotted-line.png) repeat-y left top;
+	background: url(../images/dotted-line.png) repeat-y left top;
 	background-size: 4px 4px;
 	float: right;
 	padding-left: 35px;
@@ -1624,7 +1624,7 @@ footer.entry-meta {
 
 .format-status .entry-content:before,
 .format-status .entry-meta:before {
-	background: url(images/dotted-line.png) repeat-y left bottom;
+	background: url(../images/dotted-line.png) repeat-y left bottom;
 	background-size: 4px 4px;
 	content: "";
 	display: block;
@@ -2131,7 +2131,7 @@ footer.entry-meta {
 
 .comment-list > li:after,
 .comment-list .children > li:before {
-	background: url(images/dotted-line.png) repeat left top;
+	background: url(../images/dotted-line.png) repeat left top;
 	background-size: 4px 4px;
 	content: "";
 	display: block;
@@ -2521,7 +2521,7 @@ footer.entry-meta {
 }
 
 #city{
-	background:url('images/city.png') repeat-x;
+	background:url('../images/city.png') repeat-x;
 	width:100%;
 	margin: -40px 0 0;
 	height: 275px;
@@ -2593,7 +2593,7 @@ footer.entry-meta {
 }
 
 #socialmedia h3:before, #socialmedia h3:after{
-    background: url("images/lines.png") repeat-x scroll center 11px rgba(0, 0, 0, 0);
+    background: url("../images/lines.png") repeat-x scroll center 11px rgba(0, 0, 0, 0);
     width: 50%;
     content: ' ';
 	display: table-cell;
@@ -2608,28 +2608,28 @@ footer.entry-meta {
 }
 
 #socialmedia .yelp{
-	background:url('images/yelp-icon.png') no-repeat;
+	background:url('../images/yelp-icon.png') no-repeat;
 	width:42px;
 	height:42px;
 	display:inline-block;
 }
 
 #socialmedia .foursquare{
-	background:url('images/foursquare-icon.png') no-repeat;
+	background:url('../images/foursquare-icon.png') no-repeat;
 	width:42px;
 	height:42px;
 	display:inline-block;
 }
 
 #socialmedia .facebook{
-	background:url('images/facebook-icon.png') no-repeat;
+	background:url('../images/facebook-icon.png') no-repeat;
 	width:42px;
 	height:42px;
 	display:inline-block;
 }
 
 #socialmedia .twitter{
-	background:url('images/twitter-icon.png') no-repeat;
+	background:url('../images/twitter-icon.png') no-repeat;
 	width:42px;
 	height:42px;
 	display:inline-block;
@@ -2761,7 +2761,7 @@ article.page{
 }
 
 #masthead{
-	background:url('images/headerbg.png') repeat-x;
+	background:url('../images/headerbg.png') repeat-x;
 	height:202px;
 	box-shadow: 6px 0 10px rgba(0,1,1,0.57);
 	z-index: 9;
@@ -2876,7 +2876,7 @@ background-position: center center;
 }
 
 #outercontent{
-	background:url('images/brick-tile.jpg');
+	background:url('../images/brick-tile.jpg');
 }
 
 #callouts, #chooselocations{
@@ -2898,7 +2898,7 @@ background-position: center center;
 }
 
 #callouts a, #chooselocations a{
-	background:url('images/blackboxwithwhiteborder.png') no-repeat;
+	background:url('../images/blackboxwithwhiteborder.png') no-repeat;
 	display:block;
 	float:left;
 	position:relative;
@@ -2918,7 +2918,7 @@ background-position: center center;
 }
 
 #choosebox{
-	background: url("images/redboxwitharrows.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+	background: url("../images/redboxwitharrows.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
     color: #FFFFFF;
     display: block;
     float: left;
@@ -2959,7 +2959,7 @@ background-position: center center;
 }
 
 #menutypes a{
-	background:url('images/blackboxwithwhiteborder.png') no-repeat;
+	background:url('../images/blackboxwithwhiteborder.png') no-repeat;
 	display:block;
 	float:left;
 	position:relative;
@@ -2980,7 +2980,7 @@ background-position: center center;
 }
 
 #menuicon{
-	background:url('images/menuicon.png') no-repeat;
+	background:url('../images/menuicon.png') no-repeat;
 	width:132px;
 	height:136px;
 	display:block;
@@ -2988,7 +2988,7 @@ background-position: center center;
 }
 
 #menutypes #menuicon{
-	background:url('images/menuicon.png') no-repeat;
+	background:url('../images/menuicon.png') no-repeat;
 	width:132px;
 	height:136px;
 	display:block;
@@ -3001,7 +3001,7 @@ background-position: center center;
 }
 
 #takeouticon{
-	background:url('images/takeouticon.png') no-repeat;
+	background:url('../images/takeouticon.png') no-repeat;
 	width:168px;
 	height:151px;
 	display:block;
@@ -3009,7 +3009,7 @@ background-position: center center;
 }
 
 #happyhouricon{
-	background:url('images/happyhouricon.png') no-repeat;
+	background:url('../images/happyhouricon.png') no-repeat;
 	width:168px;
 	height:115px;
 	display:block;
@@ -3021,7 +3021,7 @@ background-position: center center;
 }
 
 #cateringicon{
-	background:url('images/cateringicon.png') no-repeat;
+	background:url('../images/cateringicon.png') no-repeat;
 	width:176px;
 	height:109px;
 	display:block;
@@ -3029,7 +3029,7 @@ background-position: center center;
 }
 
 #menutypes #cateringicon{
-	background:url('images/cateringicon.png') no-repeat;
+	background:url('../images/cateringicon.png') no-repeat;
 	width:176px;
 	height:109px;
 	display:block;
@@ -3046,7 +3046,7 @@ background-position: center center;
 }
 
 #locationsicon{
-	background:url('images/locationsicon.png') no-repeat;
+	background:url('../images/locationsicon.png') no-repeat;
 	width:161px;
 	height:143px;
 	display:block;
@@ -3054,7 +3054,7 @@ background-position: center center;
 }
 
 #homepagebox{
-	background:url('images/contentbgwithfotos.png') no-repeat;
+	background:url('../images/contentbgwithfotos.png') no-repeat;
 	max-width:977px;
 	height:445px;
 	margin:61px auto 0;
@@ -3128,7 +3128,7 @@ background-position: center center;
 }
 
 h4.itemtitle{
-	background: url("images/dots.png") repeat-x scroll 0 10px rgba(0, 0, 0, 0);
+	background: url("../images/dots.png") repeat-x scroll 0 10px rgba(0, 0, 0, 0);
     color: #000000;
     font-family: Rokkitt;
     font-size: 16px;
@@ -3646,7 +3646,7 @@ h4.itemtitle{
 	(min-resolution: 120dpi) {
 
 	.site-header .search-field {
-		background-image: url(images/search-icon-2x.png);
+		background-image: url(../images/search-icon-2x.png);
 	}
 
 	.format-audio .audio-content,
@@ -3654,7 +3654,7 @@ h4.itemtitle{
 	.format-status .entry-meta:before,
 	.comment-list > li:after,
 	.comment-list .children > li:before {
-		background-image: url(images/dotted-line-2x.png);
+		background-image: url(../images/dotted-line-2x.png);
 	}
 }
 
