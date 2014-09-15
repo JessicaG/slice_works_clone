@@ -1,19 +1,9 @@
-%h1 An Error Occured
-%h3 Params
-%table
-  %tr
-    %th Request Verb
-    %td
-      = request.request_method
-  %tr
-    %th Request Path
-    %td
-      = request.path
-  %tr
-    %th(colspan=2)Parameters
-    - request.params.each do |key, value|
-      %tr
-        %td
-          = key
-        %td
-          = value
+<h1>An Error Occured</h1>
+<h3>Params</h3>
+<table>
+  <tr>
+    <th>Request Verb</th>
+    <td>
+      <%= request.request_method %>
+    </td>
+  </tr>
