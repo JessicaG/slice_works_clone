@@ -1,6 +1,0 @@
-development:
-  adapter: postgresql
-  database: slice_works
-  username: ENV[$PG_USER]
-  passwword: ENV{$PG_PASS]
-  host: localhost
