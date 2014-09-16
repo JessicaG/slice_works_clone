@@ -18,4 +18,24 @@ class SliceWorksApp < Sinatra::Base
     erb :error
   end
 
+  get '/menus' do
+    erb :menus
+  end
+
+  get '/catering' do
+    erb :catering
+  end
+
+  get '/locations' do
+    erb :locations
+  end
+
+  get '/gift_cards' do
+    erb :gift_cards
+  end
+
+  get '/contact_us' do
+    erb :contact_us
+  end
+
 end
