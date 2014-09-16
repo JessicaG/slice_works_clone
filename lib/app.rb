@@ -41,4 +41,8 @@ class SliceWorksApp < Sinatra::Base
   get '/capitol_hill' do
     erb :capitol_hill
   end
+
+  get '/lodo' do
+    erb :lodo
+  end
 end
