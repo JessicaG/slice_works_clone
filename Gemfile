@@ -5,6 +5,7 @@ gem 'paperclip', '~> 4.2'
 gem 'sinatra', require: 'sinatra/base'
 gem 'haml'
 gem 'pg'
+gem 'sequel'
 
 group :test do
   gem 'pry'
