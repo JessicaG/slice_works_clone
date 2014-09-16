@@ -38,4 +38,7 @@ class SliceWorksApp < Sinatra::Base
     erb :contact_us
   end
 
+  get '/capitol_hill' do
+    erb :capitol_hill
+  end
 end
