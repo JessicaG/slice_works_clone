@@ -22,7 +22,7 @@ class SliceWorksApp < Sinatra::Base
   end
 
   get '/' do
-    people = db.select :people
+    people = db[:people].select
     @person = people.to_a.first
     erb :home
   end
