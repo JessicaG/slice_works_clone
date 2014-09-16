@@ -7,9 +7,6 @@ class SliceWorksApp < Sinatra::Base
   set :views, settings.root + '/views'
   set :public_folder, File.dirname(__FILE__) + '/public'
 
-
-  Tilt.register Tilt::ERBTemplate, 'html.erb'
-
   get '/' do
     erb :home
   end
@@ -18,31 +15,23 @@ class SliceWorksApp < Sinatra::Base
     erb :error
   end
 
-  get '/menus' do
-    erb :menus
-  end
+  # get '/:location/' do |location|
+  #   if location == "lodo"
+  #     number = '2223334444'
+  #   else
+  #     number = '5556667777'
+  #   end
+  #
+  #   erb :location, :locals => {:number => number}
+  # end
+  #
+  # get '/:location/menu/:menu_type' do
+  #   erb params[:menu_type].to_sym # dine_in, :catering, :happy_hour
+  # end
+  #
+  # get '/:location/menu/dine_in'
 
-  get '/catering' do
-    erb :catering
-  end
-
-  get '/locations' do
-    erb :locations
-  end
-
-  get '/gift_cards' do
-    erb :gift_cards
-  end
-
-  get '/contact_us' do
-    erb :contact_us
-  end
-
-  get '/capitol_hill' do
-    erb :capitol_hill
-  end
-
-  get '/lodo' do
-    erb :lodo
+  get '/:slug' do |slug|
+    erb slug.to_sym
   end
 end
