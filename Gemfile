@@ -4,6 +4,7 @@ gem 'bootstrap-sass', '~> 3.2.0'
 gem 'paperclip', '~> 4.2'
 gem 'sinatra', require: 'sinatra/base'
 gem 'haml'
+gem 'pg'
 
 group :test do
   gem 'pry'
