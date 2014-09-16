@@ -6,9 +6,9 @@ gem 'sinatra', require: 'sinatra/base'
 gem 'haml'
 gem 'pg'
 gem 'sequel'
+gem 'pry'
 
 group :test do
-  gem 'pry'
   gem "rspec"
   gem "capybara"
   gem 'launchy'
@@ -16,6 +16,5 @@ group :test do
 end
 
 group :development do
-  gem 'pry'
   gem 'shotgun'
 end
