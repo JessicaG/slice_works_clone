@@ -15,7 +15,7 @@ class SliceWorksApp < Sinatra::Base
   end
 
   not_found do
-    haml :error
+    erb :error
   end
 
 end
