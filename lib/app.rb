@@ -1,8 +1,6 @@
 require 'sequel'
 require_relative './slice_works'
 
-#Sequel.postgres('slice_works')
-
 class SliceWorksApp < Sinatra::Base
   attr_reader :db
 
@@ -24,7 +22,7 @@ class SliceWorksApp < Sinatra::Base
   end
 
   get '/' do
-    people = db.fetch "select * from people"
+    people = db.select :people
     @person = people.to_a.first
     erb :home
   end
