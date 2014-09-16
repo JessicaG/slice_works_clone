@@ -31,4 +31,23 @@ class SliceWorksApp < Sinatra::Base
     erb :error
   end
 
+  get '/:location/' do |location|
+    if location == "lodo"
+      number = '2223334444'
+    else
+      number = '5556667777'
+    end
+
+    erb :location, :locals => {:number => number}
+  end
+
+  get '/:location/menu/:menu_type' do
+    erb params[:menu_type].to_sym # dine_in, :catering, :happy_hour
+  end
+
+  get '/:location/menu/dine_in'
+
+  get '/:slug' do |slug|
+    erb slug.to_sym
+  end
 end
