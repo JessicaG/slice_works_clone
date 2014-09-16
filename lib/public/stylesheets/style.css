@@ -46,6 +46,11 @@ Version: 1.0
  * ----------------------------------------------------------------------------
  */
 
+
+### Custom Turing
+
+.antispam { display:none;}
+
 * {
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing:    border-box;
