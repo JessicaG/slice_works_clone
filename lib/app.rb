@@ -44,7 +44,41 @@ class SliceWorksApp < Sinatra::Base
   #
   # get '/:location/menu/dine_in'
 
+  get '/admin' do
+    @menu_items = db[:menu_items]
+  end
+
+  get '/admin/menu/edit/:id' do |id|
+    db[:menu_items]
+    db["SELECT * FROM menu_items WHERE id = #{id}"]
+  end
+
+  post '/admin/menu/edit/:id' do |id|
+    db.run("UPDATE menu items SET name = #{params[:name]}, description = #{params[:description]}, price = #{params[:price]} WHERE id = #{id}")
+  end
+
+  get '/admin/locations' do
+    @locations = Sequel.get('locations')
+    @locations = [{id: 1, name: 'Denver Location', address: '123'},
+                  {id: 2, name: 'Littleton Location', address: '456'}]
+    erb 'admin/locations'
+  end
+
+  get '/admin/locations/:id/edit' do |id|
+    @location = Sequel.get('location', id)
+    erb 'admin/locations/edit'
+  end
+
   get '/:slug' do |slug|
     erb slug.to_sym
   end
+
+  # post '/admin/locations/:id' do |id|
+  #   @location = Sequal.get('location', id)
+  #
+  #   name = params[:name]
+  #   address = params[:address]
+  #
+  #   Sequal.update('location', id, {name: name, address: address})
+  # end
 end

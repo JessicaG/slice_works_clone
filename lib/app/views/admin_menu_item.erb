@@ -1,7 +1,7 @@
 <li>
-  <h3> <% = menu_item[:name] %>
-  <p> <% = menu_item[:description] %>
-  <p> <% = menu_item[:price] %>
+  <h3> <% = menu_items[:name] %>
+  <p> <% = menu_items[:description] %>
+  <p> <% = menu_items[:price] %>
   <p> Admin Options:
 
 <form action='/<%= menu_item.id %>' method='POST'>
@@ -20,3 +20,16 @@
   Menu Item Price:<input type='text' name='menu_item[price]' value=<%=menu_item.price %>/> <br/>
   <input type='submit'/>
 </form>
+
+# partial for both new and edit form
+<form action="POST" url="/admin/locations/#{@location.id}">
+  <input type="text" value="#{@location.name}" name="name" />
+  <input type="text" value="#{@location.address}" name="address" />
+
+  <input type="submit" />
+</form>
+
+# edit template
+<h1>Editing <%= @location.name %></h1>
+
+<%= render _form %>

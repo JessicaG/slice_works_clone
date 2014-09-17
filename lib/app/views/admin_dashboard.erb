@@ -8,3 +8,19 @@
     <a href="/add_menu_items">Add Menu Item</a>
     <a href="/logout">Logout</a>
   </li>
+  
+<table>
+  <thead><th>Name</th><th>Address</th><th>Actions</th></thead>
+
+  <tbody>
+
+    <% @locations.each do |location| %>
+      <tr>
+        <td><%= location.name %></td>
+        <td><%= location.address %></td>
+        <td><%= "/admin/locations/#{location.id}/edit" %></td>
+      </tr>
+    <% end %>
+
+  </tbody>
+</table>
