@@ -93,6 +93,11 @@ class SliceWorksApp < Sinatra::Base
     end
   end
 
+  get '/admin/pages/edit_contacts' do
+    @number = "(303)&nbsp;993-8127"
+    login_helper(:edit_contacts)
+  end
+
   ###LogIn and CMS Functionality###
 
   get '/admin_dashboard' do
@@ -147,7 +152,7 @@ class SliceWorksApp < Sinatra::Base
       if authenticated?
         haml view, locals: locals
       else
-        redirect '/login'
+        redirect '/log_in'
       end
     end
   end
