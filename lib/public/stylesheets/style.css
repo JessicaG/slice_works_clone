@@ -838,11 +838,13 @@ div.nav-menu > ul {
 }
 
 .nav-menu li {
+
 	display: inline-block;
 	position: relative;
 }
 
 .nav-menu li a {
+	margin-top: -200px;
 	color: #231F20;
     display: block;
     font-family: Oswald;
@@ -878,6 +880,7 @@ ul.nav-menu li:hover > ul,
 .nav-menu .current_page_ancestor > a,
 .nav-menu .current-menu-item > a,
 .nav-menu .current-menu-ancestor > a {
+
 	color: #d11534;
 }
 
