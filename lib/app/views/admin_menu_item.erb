@@ -15,8 +15,8 @@
   <% if menu_item.id %>
     <input type="hidden" name="_method" value="PUT" />
   <% end %>
-  Menu Item Name:<input type='text' name='menu_item[name]' value="<%= menu_item.name %>"/><br/>
-  Description:</br><textarea name='menu_item[description]'><%= menu_item.description %></textarea><br/>
-  Menu Item Price:<input type='text' name='menu_item[price]' value="<%=menu_item.price %>"/><br/>
+  Menu Item Name:<input type='text' name='menu_item[name]' value=<%= menu_item.name %>/> <br/>
+  Description:</br><textarea name='menu_item[description]' value=<%= menu_item.description %></textarea> <br/>
+  Menu Item Price:<input type='text' name='menu_item[price]' value=<%=menu_item.price %>/> <br/>
   <input type='submit'/>
 </form>
