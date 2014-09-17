@@ -1,14 +1,12 @@
-puts "here"
 Sequel.migration do
   up do
-    create_table(:people) do
+    create_table(:menu_sections) do
       primary_key :id
       String :name
     end
   end
 
   down do
-    puts "dropping"
-    drop_table :people
+    drop_table :menu_sections
   end
 end
