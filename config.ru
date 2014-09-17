@@ -7,6 +7,4 @@ require 'app'
 
 SliceWorksApp.db = Sequel.connect(ENV['DATABASE_URL'] || 'postgres://localhost/slice_works')
 
-database = SliceWorksApp.db
-
 run SliceWorksApp
