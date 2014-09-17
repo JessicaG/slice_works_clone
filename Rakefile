@@ -1,12 +1,5 @@
 require 'rake/testtask'
 
-#Rake::TestTask.new do |t|
-#  t.libs.push "lib"
-#  t.test_files = FileList['test/*_test.rb']
-#  t.verbose = true
-#end
-#
-
 namespace :db do
   desc "load environment variables"
   task :load_env do
@@ -54,4 +47,3 @@ namespace :db do
     require_relative "./db/seeds"
   end
 end
-
