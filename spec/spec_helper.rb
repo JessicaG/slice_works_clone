@@ -4,6 +4,9 @@ require 'bundler'
 Bundler.require
 
 require 'app'
+# TODO: figure out the correct database url, this one is the one from development
+SliceWorksApp.db = Sequel.connect(ENV['DATABASE_URL'] || 'postgres://localhost/slice_works')
+
 
 # require File.expand_path("../../config/environment", __FILE__)
 require 'capybara/rspec'
@@ -34,7 +37,7 @@ RSpec.configure do |config|
  #   DatabaseCleaner.clean
  # end
   # ## Mock Framework
-  
+
   # Run specs in random order to surface order dependencies. If you find an
   # order dependency and want to debug it, you can fix the order by providing
   # the seed, which is printed after each run.
