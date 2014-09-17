@@ -13,7 +13,7 @@ else
   SliceWorksApp.db = Sequel.connect('postgres://localhost/slice_works')
 end
 
-#database = Sequel.postgres('slice_works')
+# database = Sequel.postgres('slice_works')
 database = SliceWorksApp.db
 database.run "CREATE TABLE IF NOT EXISTS people (id serial primary key, name varchar(255))"
 database.run "INSERT INTO people(name) VALUES('George')"
