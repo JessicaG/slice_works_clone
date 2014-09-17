@@ -15,24 +15,14 @@ namespace :db do
     db << "create database slice_works;"
   end
 
-  desc "drop database"
-  task :drop do
-    require "sequel"
-    Rake::Task["db:load_env"].invoke
-    db = Sequel.connect(ENV["DATABASE_URL"])
-    db << "drop schema slice_works cascade;"
-  end
-
-  desc "Run migrations"
+  desc "run migrations"
   task :migrate, [:version] do |t, args|
     require "sequel"
     Sequel.extension :migration
     Rake::Task["db:load_env"].invoke
     db = Sequel.connect(ENV["DATABASE_URL"])
     if args[:version]
-      if args[:version] == "0"
-        `sequel -m db/migrations -M 0 #{ENV["DATABASE_URL"]}`
-      end
+      `sequel -m db/migrations -M 0 #{ENV["DATABASE_URL"]}` if args[:version] == "0"
       puts "Migrating to version #{args[:version]}"
       Sequel::Migrator.run(db, "db/migrations", target: args[:version].to_i)
     else

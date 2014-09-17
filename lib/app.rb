@@ -131,6 +131,18 @@ class SliceWorksApp < Sinatra::Base
     redirect '/admin_dashboard'
   end
 
+  post '/contact' do
+    require 'pony'
+    #Pony.mail(
+    #  from: params[:name]  + "<" + params[:email] + ">",
+    #  to: 'lukeaiken@gmail.com',
+    #  subject: params[:subject],
+    #  body: params[:message],
+    #  port: '587',
+    #  via: :smpt,
+
+  end
+
   get '/logout' do
     session[:user] = nil
     redirect '/goodbye'

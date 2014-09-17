@@ -19,11 +19,10 @@ db.run "insert into menu_sections (name) values
                                         ('Entrees')"
 
 db.run "insert into gourmet_pizza_items (fk, name, by_slice, description, price) values
-
   ('2', 'Buffalo Chicken', true, 'grilled chicken, mozzarella and a special spicy buffalo wing sauce', '20'),
   ('2', 'Green Chile', true, 'housemade green chili sauce and mozzarella', 17),
   ('2', 'White Pizza', true, 'seasoned ricotta, parmigiano, and mozzarella', 17),
-  ('2', 'Tomato Pesto', true, 'fresh tomato, pesto, garlic, mozzarella and parmigiano, 17),
+  ('2', 'Tomato Pesto', true, 'fresh tomato, pesto, garlic, mozzarella and parmigiano', 17),
   ('2', 'Stuffed Meat', true, 'ham, salami, pepperoni, sausage, meatball and mozzarella', 26),
   ('2', 'Stuffed Veggie', true, 'zucchini, broccoli, eggplant spinach, garlic and mozzarella', 26),
   ('2', 'Bacon Cheeseburger', true, 'hamburger, bacon, cheddar & mozzarella in a special sweet tomato sauce', 20),
@@ -37,4 +36,4 @@ db.run "insert into gourmet_pizza_items (fk, name, by_slice, description, price)
   ('2', 'White Veggie', false, 'tomato, red onions, scallions, broccoli, garlic, basil & mozzarella', 17),
   ('2', 'White Spinach', false, 'seasoned ricotta, spinach, mozzarella, garlic and parmigiano', 18),
   ('2', 'Hawaiian', true, 'ham, pineapple, pizza sauce and mozzarella', 17),
-  ('2', 'BBQ Chicken', 'grilled chicken, BBQ sauce, red onion, scallions, mozzarella & cheddar', 20)"
+  ('2', 'BBQ Chicken', false, 'grilled chicken, BBQ sauce, red onion, scallions, mozzarella & cheddar', 20)"
