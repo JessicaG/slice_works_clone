@@ -7,6 +7,7 @@ gem 'haml'
 gem 'pg'
 gem 'sequel'
 gem 'pry'
+gem 'dotenv'
 
 group :test do
   gem "rspec"

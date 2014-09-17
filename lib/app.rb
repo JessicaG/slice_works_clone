@@ -1,5 +1,4 @@
 require 'sequel'
-require_relative './slice_works'
 
 class SliceWorksApp < Sinatra::Base
   attr_reader :db
