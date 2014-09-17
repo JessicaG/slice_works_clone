@@ -8,8 +8,6 @@ class SliceWorksApp < Sinatra::Base
   set :views, settings.root + '/views'
   set :public_folder, File.dirname(__FILE__) + '/public'
 
-  Tilt.register Tilt::ERBTemplate, 'html.erb'
-
   enable :sessions
 
   class << self
