@@ -150,7 +150,7 @@ class SliceWorksApp < Sinatra::Base
   end
 
   post '/edit/:item_id' do |item_id|
-    Menu.new.edit(item_id, params) if authenticated?
+    db.run("update gourmet_pizza_items set name='#{params[:name]}', description='#{params[:description]}', price='#{params[:price]}', by_slice='#{params[:by_slice]}' where id='#{item_id}'")
     redirect '/admin_dashboard'
   end
 
