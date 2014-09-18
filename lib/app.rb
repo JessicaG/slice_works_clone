@@ -1,5 +1,9 @@
+require 'pony'
 require 'sequel'
 require_relative 'app/menu'
+
+require 'dotenv'
+Dotenv.load
 
 class SliceWorksApp < Sinatra::Base
   attr_reader :db
@@ -18,7 +22,7 @@ class SliceWorksApp < Sinatra::Base
   set :email_address, 'daz@gmail.com'
   set :email_service, ENV['EMAIL_SERVICE'] || 'gmail.com'
   set :email_domain, ENV['SENDGRID_DOMAIN'] || 'localhost.localdomain'
-
+ 
   use Rack::Session::Cookie, :key => 'rack.session',
                              :path => '/',
                              :secret => 'love'
