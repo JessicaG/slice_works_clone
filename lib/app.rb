@@ -94,8 +94,13 @@ class SliceWorksApp < Sinatra::Base
   end
 
   get '/admin/pages/edit_contacts' do
-    @number = "(303)&nbsp;993-8127"
-    login_helper(:edit_contacts)
+    number = db[:contacts].select
+    require 'pry'
+    binding.pry
+    @lodo_number = number.first
+    # @number = "(303)&nbsp;993-8127"
+    # login_helper(:edit_contacts)
+    erb :edit_contacts
   end
 
   ###LogIn and CMS Functionality###
