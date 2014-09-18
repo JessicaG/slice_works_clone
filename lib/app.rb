@@ -1,8 +1,9 @@
+require 'pony'
 require 'sequel'
 require_relative 'app/menu'
 
-# require 'dotenv'
-# Dotenv.load
+require 'dotenv'
+Dotenv.load
 
 class SliceWorksApp < Sinatra::Base
   attr_reader :db
@@ -153,7 +154,6 @@ class SliceWorksApp < Sinatra::Base
   end
 
   post '/contact' do 
-    require 'pony'
      Pony.mail(
       :from => params[:name] + "<" + params[:email] + ">",
       :to => settings.email_address,
