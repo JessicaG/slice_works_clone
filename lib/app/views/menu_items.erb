@@ -1,0 +1,16 @@
+<!-- <form action='/<%= @menu_items %>' method='POST'> -->
+
+<h2>Existing Menu Items</h2>
+
+<ul class="list-unstyled">
+  <% @menu_items.each do |menu_item| %>
+    <li>
+      Name: <%= menu_item[:name] %><br/>
+      Price: <%= menu_item[:price] %><br/>
+      Description: <%= menu_item[:description] %><br/>
+      <a href="/edit/<%= menu_item[:id] %>" class="btn btn-default btn-sm">
+        <span class="glyphicon glyphicon-pencil"></span> Edit</a>
+      <!-- </form> -->
+    </li>
+  <% end %>
+</ul>

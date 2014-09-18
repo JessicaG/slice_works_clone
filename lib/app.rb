@@ -33,6 +33,8 @@ class SliceWorksApp < Sinatra::Base
 
   get '/' do
     contacts = db[:contacts].select.to_a
+    menu_items = db[:menu_items].select.to_a
+    @menu_items = menu_items.first
     @capitol_hill = contacts.first
     @lodo         = contacts.last
     erb :home, layout: :home_layout
@@ -121,14 +123,19 @@ class SliceWorksApp < Sinatra::Base
     login_helper(:admin_dashboard)
   end
 
-  get '/edit_menu' do
+  get '/new' do
     @menu_item = {}
     login_helper(:edit)
   end
 
+  get '/menu_items' do
+    @menu_items = db[:gourmet_pizza_items].to_a
+    login_helper(:menu_items)
+  end
+
   get '/edit/:item_id' do |item_id|
-    @menu_item = db["select * from gourmet_pizza_items where id=#{item_id}"].to_a.first
-    login_helper(:form, {item_id: item_id})
+    @menu_item = db["select * from gourmet_pizza_items where id='#{item_id}'"].to_a.first
+    login_helper(:edit, {item_id: item_id})
   end
 
   post '/edit/:item_id' do |item_id|
@@ -190,7 +197,7 @@ class SliceWorksApp < Sinatra::Base
 
     def login_helper(view, locals = {})
       if authenticated?
-        erb :admin_dashboard
+        erb view
       else
         redirect '/log_in'
       end
