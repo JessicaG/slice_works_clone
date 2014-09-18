@@ -155,7 +155,7 @@ class SliceWorksApp < Sinatra::Base
 
   post '/edit/:item_id' do |item_id|
     db.run("update gourmet_pizza_items set name='#{params[:name]}', description='#{params[:description]}', price='#{params[:price]}', by_slice='#{params[:by_slice]}' where id='#{item_id}'")
-    redirect '/admin_dashboard'
+    redirect "/edit/#{item_id}"
   end
 
   get '/delete/:item_id' do |item_id|
