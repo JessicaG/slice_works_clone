@@ -107,12 +107,19 @@ class SliceWorksApp < Sinatra::Base
     end
   end
 
+  get '/happy-hour/' do
+    erb :happy_hour_menu
+  end
+
+  get '/catering/' do
+    erb :catering_menu
+  end
+
   get '/admin/pages/edit_contacts' do
-    number = db[:contacts].select
-    @lodo_number = number.first
-    # @number = "(303)&nbsp;993-8127"
-    # login_helper(:edit_contacts)
-    erb :edit_contacts
+    number = db[:contacts].select.to_a
+    @lodo_number = number.last
+    @capitol_hill_number = number.first
+    login_helper(:edit_contacts)
   end
 
   ###LogIn and CMS Functionality###
