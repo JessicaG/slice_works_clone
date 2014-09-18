@@ -7,11 +7,11 @@
           <h1 class="entry-title">Contact Us</h1>
         </header><!-- .entry-header -->
         <div id="edit_form">
-          <form id="edit_contacts" action="index.html" method="post">
+          <form id="edit_contacts" action="/phone_number" method="post">
             Capitol Hill Location Telephone:
-              <input type="tel" name="usrtel" value=<%= @capitol_hill[:number] %> >
+              <input type="tel" name="capitol_hill_number" value=<%= @capitol_hill[:number] %> >
             LODO Location Telephone:
-              <input type="tel" name="usrtel" value=<%= @lodo[:number] %>>
+              <input type="tel" name="lodo_number" value=<%= @lodo[:number] %>>
             <button name="submit">Submit</button>
 
           </form>

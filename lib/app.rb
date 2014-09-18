@@ -208,6 +208,12 @@ class SliceWorksApp < Sinatra::Base
     end
   end
 
+  post '/phone_number' do
+    db.run("update contacts set number = '#{params[:lodo_number]}' where location = 'LODO'")
+    db.run("update contacts set number = '#{params[:capitol_hill_number]}' where location = 'Capitol Hill'")
+    redirect '/admin_dashboard'
+  end
+
   get '/:slug' do |slug|
     contacts = db[:contacts].select.to_a
 
