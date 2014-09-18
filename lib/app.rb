@@ -96,6 +96,16 @@ class SliceWorksApp < Sinatra::Base
     end
   end
 
+  get '/admin/pages/edit_contacts' do
+    number = db[:contacts].select
+    require 'pry'
+    binding.pry
+    @lodo_number = number.first
+    # @number = "(303)&nbsp;993-8127"
+    # login_helper(:edit_contacts)
+    erb :edit_contacts
+  end
+
   ###LogIn and CMS Functionality###
 
   get '/admin_dashboard' do
@@ -129,6 +139,18 @@ class SliceWorksApp < Sinatra::Base
   post '/add' do
     Menu.new.add(params) if authenticated?
     redirect '/admin_dashboard'
+  end
+
+  post '/contact' do
+    require 'pony'
+    #Pony.mail(
+    #  from: params[:name]  + "<" + params[:email] + ">",
+    #  to: 'lukeaiken@gmail.com',
+    #  subject: params[:subject],
+    #  body: params[:message],
+    #  port: '587',
+    #  via: :smpt,
+
   end
 
   get '/logout' do

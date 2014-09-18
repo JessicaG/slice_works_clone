@@ -37,7 +37,7 @@ describe 'viewing the home page', type: :feature do
     end
     expect(page).to have_css('#clicktocall')
       within '#clicktocall' do
-    expect(page).to have_content("(303 297-3464)")
+    expect(page).to have_content("(303) 297-3464")
     end
   end
 
@@ -124,7 +124,7 @@ describe 'viewing the home page', type: :feature do
     within '.menu-main-menu-capitol-hill-container' do
       click_link 'Lodo'
     end
-    expect(page).to have_content("(303 297-3464)")
+    expect(page).to have_content("(303) 297-3464")
 
     within '.menu-main-menu-capitol-hill-container' do
       click_link 'Capitol Hill'
@@ -151,25 +151,92 @@ describe 'viewing the home page', type: :feature do
     end
       expect(page).to have_css('')
   end
-  it 'can travel from either the capitol hill page to the third of the center stage links' do
+  it 'can travel from the capitol hill page to the third of the center stage links' do
     skip
     visit '/capitol_hill'
     within '#callouts' do
       links = all('a')
       links[2].click
     end
-      expect(page).to have_css('')
+    expect(page).to have_css('')
   end
 
-  it 'can travel from either the lodo page to one of the center stage links' do
+  it 'can travel from the lodo page to one of the center stage links' do
     skip
     visit '/lodo'
     within '#callouts' do
       links = all('a')
       links[1].click
     end
+    expect(page).to have_css('')
+  end
 
-  it 'can show dine-in, cater or happy hour from the menus page'
-  it 'can travel to the capitol hill page or the lodo page from the maps on /locations'
 
+  it 'can show dine-in from the menus page' do
+    skip
+    visit '/menus'
+    within '#dinein'do
+      links = all('a')
+      links[0].click
+    end
+    expect(page).to have_css('')
+  end
+
+  it 'can show cater from the menus page' do
+    skip
+    visit '/menus'
+    within '#catering'do
+      links = all('a')
+      links[0].click
+    end
+    expect(page).to have_css('')
+  end
+
+  it 'can show happy hour from the menus page' do
+    skip
+    visit '/menus'
+    within '#happyhour'do
+      links = all('a')
+      links[0].click
+    end
+    expect(page).to have_css('')
+  end
+
+  it 'can travel to the capitol hill page from the maps on /locations' do
+    visit '/locations'
+    within '.entry-content' do
+      click_link('Capitol Hill Location')
+    end
+    expect(page).to have_content('(303) 993-8127')
+    # expect(page).to have_content('(303) 297-3464')
+  end
+
+  it 'can travel the lodo page from the maps on /locations' do
+    visit '/locations'
+    within '.entry-content' do
+      click_link('LODO Location')
+    end
+    expect(page).to have_content('(303) 297-3464')
+  end
+
+  it 'can check whether you can access to the admin page without logging in' do
+    skip
+    visit '/log_in'
+    fill_in('user', :with => 'stuff')
+    fill_in('password', :with => 'more_stuff')
+    click_button('Log In')
+    expect(page).status_code == 200
+  end
+
+  it 'can log into the admin page using the form and access a page to change content' do
+    skip
+    visit '/log_in'
+    fill_in('user', :with => 'stuff')
+    fill_in('password', :with => 'more_stuff')
+    click_button('Log In')
+    expect(page).to have_text('Admin Dashboard')
+  end
+
+  it 'can change a menu item in the admin and see it render on the menu'
+  it 'can change the phone number in the db and see it render in the site'
 end
