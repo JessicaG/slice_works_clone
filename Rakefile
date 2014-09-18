@@ -36,4 +36,26 @@ namespace :db do
     Rake::Task["db:load_env"].invoke
     require_relative "./db/seeds"
   end
+
+  desc "drop the database, re-create it, migrate and seed"
+  task :reset do
+    require "sequel"
+    Rake::Task["db:load_env"].invoke
+    psql = Sequel.connect(ENV["POSTGRES_URL"])
+    puts "dropping database"
+    psql << "drop database slice_works;"
+    puts "creating database"
+    psql << "create database slice_works;"
+    Rake::Task["db:migrate"].invoke
+    Rake::Task["db:seed"].invoke
+  end
+end
+
+desc "makeshift console"
+task :console do
+  require "pry"
+  require "sequel"
+  Rake::Task["db:load_env"].invoke
+  db = Sequel.connect(ENV["DATABASE_URL"])
+  binding.pry
 end
