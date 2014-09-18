@@ -19,8 +19,9 @@ class SliceWorksApp < Sinatra::Base
   end
 
   get '/' do
-    people = db[:people].select
-    @person = people.to_a.first
+    contacts = db[:contacts].select.to_a
+    @capitol_hill = contacts.first
+    @lodo         = contacts.last
     erb :home, layout: :home_layout
   end
 
@@ -95,8 +96,6 @@ class SliceWorksApp < Sinatra::Base
 
   get '/admin/pages/edit_contacts' do
     number = db[:contacts].select
-    require 'pry'
-    binding.pry
     @lodo_number = number.first
     # @number = "(303)&nbsp;993-8127"
     # login_helper(:edit_contacts)
@@ -175,12 +174,21 @@ class SliceWorksApp < Sinatra::Base
   end
 
   get '/:slug' do |slug|
+    contacts = db[:contacts].select.to_a
+    # get values from db
+
     if slug == "lodo"
-      number = '(303) 297-3464'
+      number         = contacts.last
+      # number = lodo[:number] '(303) 297-3464'
       erb :capitol_hill, :locals => {:number => number}
     elsif slug == 'capitol_hill'
-      number = '(303) 993-8127'
+      number = contacts.first
+      # number = '(303) 993-8127'
       erb :capitol_hill, :locals => {:number => number}
+    elsif slug == 'locations'
+      @capitol_hill = contacts.first
+      @lodo         = contacts.last
+      erb :locations
     else
     erb slug.to_sym
     end

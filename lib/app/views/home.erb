@@ -6,9 +6,9 @@
 
 				<div id="chooselocations">
 					<a id="capitolhill" href="/capitol_hill">
-            <%= @person[:id] %> Capitol Hill<br />
+            <%= @capitol_hill[:location] %> <br />
 						<span style="font-family: Rokkitt; font-size: 30px; display: inline-block; line-height: 23px; margin: 8px 0px 0px;">
-						(303) 993-8127<br />
+						<%= @capitol_hill[:number] %><br />
 						700 E Colfax Ave<br />
 						Denver, CO 80203</span>
 					</a>
@@ -16,9 +16,9 @@
 						Choose Your Location For Menu Options
 					</span>
 					<a id="lodo" href="/lodo">
-						LoDo<br />
+						<%= @lodo[:location] %><br />
 						<span style="font-family: Rokkitt; font-size: 30px; display: inline-block; line-height: 23px; margin: 8px 0px 0px;">
-						(303) 297-3464<br />
+						<%= @lodo[:number] %><br />
 						1433 17th Street Ste. 100<br />
 						Denver, CO 80202</span>
 					</a>
