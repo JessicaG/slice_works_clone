@@ -1,26 +1,12 @@
 <h2> Admin Dashboard </h2>
 <ul>
   <li>
-    <a href="/edit_catering">Edit Catering</a>
-    <a href="/edit_contact">Edit Contact</a>
-    <a href="/edit_locations">Edit Catering</a>
-    <a href="/edit_menus">Edit Catering</a>
-    <a href="/add_menu_items">Add Menu Item</a>
-    <a href="/logout">Logout</a>
+    <a href="/edit_catering">Edit Catering</a><br/>
+    <a href="/edit">Edit Menu Items</a><br/>
+    <a href="/edit_contact">Edit Contact</a><br/>
+    <a href="/edit_locations">Edit Catering</a><br/>
+    <a href="/edit_menus">Edit Catering</a><br/>
+    <a href="/add_menu_items">Add Menu Item</a><br/>
+    <a href="/logout">Logout</a><br/>
   </li>
   
-<table>
-  <thead><th>Name</th><th>Address</th><th>Actions</th></thead>
-
-  <tbody>
-
-    <% @locations.each do |location| %>
-      <tr>
-        <td><%= location.name %></td>
-        <td><%= location.address %></td>
-        <td><%= "/admin/locations/#{location.id}/edit" %></td>
-      </tr>
-    <% end %>
-
-  </tbody>
-</table>

@@ -1,4 +1,5 @@
 require 'sequel'
+require_relative 'app/menu'
 
 # require 'dotenv'
 # Dotenv.load
@@ -21,6 +22,14 @@ class SliceWorksApp < Sinatra::Base
   set :email_service, ENV['EMAIL_SERVICE'] || 'gmail.com'
   set :email_domain, ENV['SENDGRID_DOMAIN'] || 'localhost.localdomain'
  
+  use Rack::Session::Cookie, :key => 'rack.session',
+                             :path => '/',
+                             :secret => 'love'
+
+  class << self
+    attr_accessor :db
+  end
+
   before do
     @db = self.class.db
   end
@@ -85,17 +94,27 @@ class SliceWorksApp < Sinatra::Base
     redirect to('/pages')
   end
 
-  get '/login' do
-    haml :login
+  get '/log_in' do
+    erb :log_in
   end
 
-  post '/login' do
+  post '/log_in' do
     authenticate!
     if session[:user] == "admin"
       redirect '/admin_dashboard'
     else
-      redirect '/login'
+      redirect '/log_in'
     end
+  end
+
+  get '/admin/pages/edit_contacts' do
+    number = db[:contacts].select
+    require 'pry'
+    binding.pry
+    @lodo_number = number.first
+    # @number = "(303)&nbsp;993-8127"
+    # login_helper(:edit_contacts)
+    erb :edit_contacts
   end
 
   ###LogIn and CMS Functionality###
@@ -105,10 +124,12 @@ class SliceWorksApp < Sinatra::Base
   end
 
   get '/edit_menu' do
-    login_helper(:admin_menu)
+    @menu_item = {}
+    login_helper(:edit)
   end
 
   get '/edit/:item_id' do |item_id|
+    @menu_item = db["select * from gourmet_pizza_items where id=#{item_id}"].to_a.first
     login_helper(:form, {item_id: item_id})
   end
 
@@ -123,7 +144,7 @@ class SliceWorksApp < Sinatra::Base
   end
 
   get '/add_menu_item' do
-    haml :add_form
+    erb :add_form
   end
 
   post '/add' do
@@ -160,7 +181,7 @@ class SliceWorksApp < Sinatra::Base
   ###Authentication Helpers###
   helpers do
     def authenticate!
-      if params[:user] == "admin" && params[:password] == "password"
+      if params[:user] == "admin" && params[:password] == "ilovepizza"
         session[:user] = "admin"
       end
     end
@@ -171,9 +192,9 @@ class SliceWorksApp < Sinatra::Base
 
     def login_helper(view, locals = {})
       if authenticated?
-        haml view, locals: locals
+        erb :admin_dashboard
       else
-        redirect '/login'
+        redirect '/log_in'
       end
     end
   end

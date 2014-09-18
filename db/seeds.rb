@@ -2,8 +2,13 @@ require 'sequel'
 
 db = Sequel.connect(ENV["DATABASE_URL"])
 
-db.run "insert into menu_sections (name) values 
-                                        ('Pizza'), 
+db.run "insert into contacts (location, number) values
+              ('Capitol Hill', '(303) 993-8127'),
+              ('LODO', '(303) 297-3464')"
+
+
+db.run "insert into menu_sections (name) values
+                                        ('Pizza'),
                                         ('Gourmet Pizza'),
                                         ('Slices & Specialty Breads'),
                                         ('Sub Sandwiches'),
@@ -25,8 +30,8 @@ db.run "insert into gourmet_pizza_items (fk, name, by_slice, description, price)
   ('2', 'Chicken Veggie', true, 'grilled chicken, tomato, red onions, scallions, broccoli, garlic,
   basil & mozzarella', 19),
   ('2', 'Margherita', false, 'pizza sauce, basil, fresh mozzarella and parmigiano', 18),
-  ('2', 'The Works', true, 'pepperoni, sausage, meatballs, mushrooms, onions, peppers & mozzarella', 20), 
-  ('2', 'Baked Potato Pizza', true, 'sliced potato, scallions, mozzarella, cheddar, bacon & ranch', 20), 
+  ('2', 'The Works', true, 'pepperoni, sausage, meatballs, mushrooms, onions, peppers & mozzarella', 20),
+  ('2', 'Baked Potato Pizza', true, 'sliced potato, scallions, mozzarella, cheddar, bacon & ranch', 20),
   ('2', 'White Clam', false, 'fresh chopped clams, garlic, oregano & parmigiano', 18),
   ('2', 'White Veggie', false, 'tomato, red onions, scallions, broccoli, garlic, basil & mozzarella', 17),
   ('2', 'White Spinach', false, 'seasoned ricotta, spinach, mozzarella, garlic and parmigiano', 18),
