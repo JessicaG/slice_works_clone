@@ -121,6 +121,10 @@ class SliceWorksApp < Sinatra::Base
     erb :catering_menu
   end
 
+  get '/menu/dine_in' do
+    erb :dine_in
+  end
+
   get '/admin/pages/edit_contacts' do
     number = db[:contacts].select.to_a
     @lodo_number = number.last
