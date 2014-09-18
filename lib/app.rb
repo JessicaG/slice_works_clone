@@ -1,5 +1,9 @@
+require 'pony'
 require 'sequel'
 require_relative 'app/menu'
+
+require 'dotenv'
+Dotenv.load
 
 class SliceWorksApp < Sinatra::Base
   attr_reader :db
@@ -109,12 +113,19 @@ class SliceWorksApp < Sinatra::Base
     end
   end
 
+  get '/happy-hour/' do
+    erb :happy_hour_menu
+  end
+
+  get '/catering/' do
+    erb :catering_menu
+  end
+
   get '/admin/pages/edit_contacts' do
-    number = db[:contacts].select
-    @lodo_number = number.first
-    # @number = "(303)&nbsp;993-8127"
-    # login_helper(:edit_contacts)
-    erb :edit_contacts
+    number = db[:contacts].select.to_a
+    @lodo_number = number.last
+    @capitol_hill_number = number.first
+    login_helper(:edit_contacts)
   end
 
   ###LogIn and CMS Functionality###
@@ -204,23 +215,28 @@ class SliceWorksApp < Sinatra::Base
     end
   end
 
+  post '/phone_number' do
+    db.run("update contacts set number = '#{params[:lodo_number]}' where location = 'LODO'")
+    db.run("update contacts set number = '#{params[:capitol_hill_number]}' where location = 'Capitol Hill'")
+    redirect '/admin_dashboard'
+  end
+
   get '/:slug' do |slug|
     contacts = db[:contacts].select.to_a
-    # get values from db
 
     if slug == "lodo"
       number         = contacts.last
-      # number = lodo[:number] '(303) 297-3464'
       erb :capitol_hill, :locals => {:number => number}
     elsif slug == 'capitol_hill'
       number = contacts.first
-      # number = '(303) 993-8127'
       erb :capitol_hill, :locals => {:number => number}
     elsif slug == 'locations'
       @capitol_hill = contacts.first
       @lodo         = contacts.last
       erb :locations
     else
+      @capitol_hill = contacts.first
+      @lodo         = contacts.last
     erb slug.to_sym
     end
   end

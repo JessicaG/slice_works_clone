@@ -1,66 +1,68 @@
-<div id="slider-overlay">
-	<div id="slider">
-		<ul>
-			<li>
-				<span href="link1" title="link1" style="background-image:url('images/Slice-Header_3.jpg')">
-					<div class="blackheadline">2013 Best Pizza.</div>
-					<br />
-					<a class="redbutton" href="/menu">Menu ></a>
-				</span>
-			</li>
-			<li>
-				<span href="link2" title="link2" style="background-image:url('images/image1.jpeg')">
-					<div class="blackheadline">We cater events.</div>
-					<br />
-					<a class="redbutton" href="/catering">Catering ></a>
-				</span>
-			</li>
-		</ul>
-		<div style="clear: both"></div>
+<div id="outercontent"
+	<div id="slider-overlay">
+		<div id="slider">
+			<ul>
+				<li>
+					<span href="link1" title="link1" style="background-image:url('images/Slice-Header_3.jpg')">
+						<div class="blackheadline">2013 Best Pizza.</div>
+						<br />
+						<a class="redbutton" href="/menu">Menu ></a>
+					</span>
+				</li>
+				<li>
+					<span href="link2" title="link2" style="background-image:url('images/image1.jpeg')">
+						<div class="blackheadline">We cater events.</div>
+						<br />
+						<a class="redbutton" href="/catering">Catering ></a>
+					</span>
+				</li>
+			</ul>
+			<div style="clear: both"></div>
+		</div>
 	</div>
-</div>
 
-<script language="javascript" type="text/javascript">
-	$(function() {
-		$("#slider").webwidget_slideshow_dot({
-			slideshow_time_interval: '15000',
-			slideshow_window_width: window.innerWidth,
-			slideshow_window_height: '408',
-			slideshow_title_color: '#17CCCC',
-			soldeshow_foreColor: '#000',
-			directory: '/images/'
+	<script language="javascript" type="text/javascript">
+		$(function() {
+			$("#slider").webwidget_slideshow_dot({
+				slideshow_time_interval: '15000',
+				slideshow_window_width: window.innerWidth,
+				slideshow_window_height: '408',
+				slideshow_title_color: '#17CCCC',
+				soldeshow_foreColor: '#000',
+				directory: '/images/'
+			});
 		});
-	});
-</script>
+	</script>
 
-<div id="main" class="site-main">
-	<div id="primary" class="content-area">
-		<div id="content" class="site-content" role="main">
-			<a href="tel:number" id="clicktocall"><%= number %></a>
-			<div id="callouts">
-				<a id="menucallout" href="/menu">
-					<span id="menuicon"></span>
-					<br />
-					Menu
-					</a>
-				<a id="cateringcallout" href="/catering">
-					<span id="cateringicon"></span>
-					<br />
-					Catering
-					</a>
-				<a id="locationscallout" href="/locations">
-					<span id="locationsicon"></span>
-					<br />
-					Locations
-					</a>
-				<div class="clear"></div>
-			</div>
+	<div id="main" class="site-main">
+		<div id="primary" class="content-area">
+			<div id="content" class="site-content" role="main">
+				<a href="tel:number" id="clicktocall"><%= number %></a>
+				<div id="callouts">
+					<a id="menucallout" href="/menu">
+						<span id="menuicon"></span>
+						<br />
+						Menu
+						</a>
+					<a id="cateringcallout" href="/catering">
+						<span id="cateringicon"></span>
+						<br />
+						Catering
+						</a>
+					<a id="locationscallout" href="/locations">
+						<span id="locationsicon"></span>
+						<br />
+						Locations
+						</a>
+					<div class="clear"></div>
+				</div>
 
-		<article id="homepagebox">
-			<div id="homepagecontent">
-				<h1>Eat. Drink. Relax.</h1>
-				<p>&#8220;Choosing which pizza by the slice you want from this place is like trying to choose what cereal you want at the grocery store. Its easy though, just look at the wall of pizza and decide which one best suits your current mood! Stuffed pizzas, Big NY style slices, Grandma&#8217;s style, and Stromboli, are just the beginning of what this place has to offer.&#8221;</p>
-			</div>
-		</article>
+			<article id="homepagebox">
+				<div id="homepagecontent">
+					<h1>Eat. Drink. Relax.</h1>
+					<p>&#8220;Choosing which pizza by the slice you want from this place is like trying to choose what cereal you want at the grocery store. Its easy though, just look at the wall of pizza and decide which one best suits your current mood! Stuffed pizzas, Big NY style slices, Grandma&#8217;s style, and Stromboli, are just the beginning of what this place has to offer.&#8221;</p>
+				</div>
+			</article>
+		</div>
 	</div>
 </div>

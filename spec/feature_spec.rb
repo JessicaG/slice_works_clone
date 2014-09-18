@@ -37,7 +37,6 @@ describe 'viewing the home page', type: :feature do
     end
     expect(page).to have_css('#clicktocall')
       within '#clicktocall' do
-    expect(page).to have_content("(303) 297-3464")
     end
   end
 
@@ -124,7 +123,7 @@ describe 'viewing the home page', type: :feature do
     within '.menu-main-menu-capitol-hill-container' do
       click_link 'Lodo'
     end
-    expect(page).to have_content("(303) 297-3464")
+    expect(page).to have_css("#clicktocall")
 
     within '.menu-main-menu-capitol-hill-container' do
       click_link 'Capitol Hill'
@@ -216,7 +215,7 @@ describe 'viewing the home page', type: :feature do
     within '.entry-content' do
       click_link('LODO Location')
     end
-    expect(page).to have_content('(303) 297-3464')
+    expect(page).to have_css('#clicktocall')
   end
 
   it 'can check whether you can access to the admin page without logging in' do
