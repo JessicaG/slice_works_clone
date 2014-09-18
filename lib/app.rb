@@ -1,4 +1,5 @@
 require 'sequel'
+require_relative 'app/menu'
 
 class SliceWorksApp < Sinatra::Base
   attr_reader :db
@@ -8,7 +9,9 @@ class SliceWorksApp < Sinatra::Base
   set :views, settings.root + '/views'
   set :public_folder, File.dirname(__FILE__) + '/public'
 
-  enable :sessions
+  use Rack::Session::Cookie, :key => 'rack.session',
+                             :path => '/',
+                             :secret => 'love'
 
   class << self
     attr_accessor :db
@@ -80,16 +83,16 @@ class SliceWorksApp < Sinatra::Base
     redirect to('/pages')
   end
 
-  get '/login' do
-    haml :login
+  get '/log_in' do
+    erb :log_in
   end
 
-  post '/login' do
+  post '/log_in' do
     authenticate!
     if session[:user] == "admin"
       redirect '/admin_dashboard'
     else
-      redirect '/login'
+      redirect '/log_in'
     end
   end
 
@@ -100,10 +103,12 @@ class SliceWorksApp < Sinatra::Base
   end
 
   get '/edit_menu' do
-    login_helper(:admin_menu)
+    @menu_item = {}
+    login_helper(:edit)
   end
 
   get '/edit/:item_id' do |item_id|
+    @menu_item = db["select * from gourmet_pizza_items where id=#{item_id}"].to_a.first
     login_helper(:form, {item_id: item_id})
   end
 
@@ -118,7 +123,7 @@ class SliceWorksApp < Sinatra::Base
   end
 
   get '/add_menu_item' do
-    haml :add_form
+    erb :add_form
   end
 
   post '/add' do
@@ -134,7 +139,7 @@ class SliceWorksApp < Sinatra::Base
   ###Authentication Helpers###
   helpers do
     def authenticate!
-      if params[:user] == "admin" && params[:password] == "password"
+      if params[:user] == "admin" && params[:password] == "ilovepizza"
         session[:user] = "admin"
       end
     end
@@ -145,9 +150,9 @@ class SliceWorksApp < Sinatra::Base
 
     def login_helper(view, locals = {})
       if authenticated?
-        haml view, locals: locals
+        erb :admin_dashboard
       else
-        redirect '/login'
+        redirect '/log_in'
       end
     end
   end
