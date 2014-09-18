@@ -219,8 +219,24 @@ describe 'viewing the home page', type: :feature do
     expect(page).to have_content('(303) 297-3464')
   end
 
-  it 'can check whether you can access the admin page without logging in'
-  it 'can log into the admin page using the form and access a page to change content'
+  it 'can check whether you can access to the admin page without logging in' do
+    skip
+    visit '/log_in'
+    fill_in('user', :with => 'stuff')
+    fill_in('password', :with => 'more_stuff')
+    click_button('Log In')
+    expect(page).status_code == 200
+  end
+
+  it 'can log into the admin page using the form and access a page to change content' do
+    skip
+    visit '/log_in'
+    fill_in('user', :with => 'stuff')
+    fill_in('password', :with => 'more_stuff')
+    click_button('Log In')
+    expect(page).to have_text('Admin Dashboard')
+  end
+
   it 'can change a menu item in the admin and see it render on the menu'
   it 'can change the phone number in the db and see it render in the site'
 end
