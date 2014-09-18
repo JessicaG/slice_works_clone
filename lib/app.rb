@@ -199,15 +199,12 @@ class SliceWorksApp < Sinatra::Base
 
   get '/:slug' do |slug|
     contacts = db[:contacts].select.to_a
-    # get values from db
 
     if slug == "lodo"
       number         = contacts.last
-      # number = lodo[:number] '(303) 297-3464'
       erb :capitol_hill, :locals => {:number => number}
     elsif slug == 'capitol_hill'
       number = contacts.first
-      # number = '(303) 993-8127'
       erb :capitol_hill, :locals => {:number => number}
     elsif slug == 'locations'
       @capitol_hill = contacts.first
