@@ -2,8 +2,8 @@ require 'sequel'
 
 db = Sequel.connect(ENV["DATABASE_URL"])
 
-db.run "insert into menu_sections (location, number) values
-              ('Capitol Hill', '(303) 993-8127')
+db.run "insert into contacts (location, number) values
+              ('Capitol Hill', '(303) 993-8127'),
               ('LODO', '(303) 297-3464')"
 
 
