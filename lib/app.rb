@@ -36,6 +36,9 @@ class SliceWorksApp < Sinatra::Base
   end
 
   get '/' do
+    contacts = db[:contacts].select.to_a
+    @capitol_hill = contacts.first
+    @lodo         = contacts.last
     erb :home, layout: :home_layout
   end
 
@@ -110,8 +113,6 @@ class SliceWorksApp < Sinatra::Base
 
   get '/admin/pages/edit_contacts' do
     number = db[:contacts].select
-    require 'pry'
-    binding.pry
     @lodo_number = number.first
     # @number = "(303)&nbsp;993-8127"
     # login_helper(:edit_contacts)
@@ -153,7 +154,8 @@ class SliceWorksApp < Sinatra::Base
     redirect '/admin_dashboard'
   end
 
-  post '/contact' do 
+  post '/contact' do
+    require 'pony'
      Pony.mail(
       :from => params[:name] + "<" + params[:email] + ">",
       :to => settings.email_address,
@@ -161,18 +163,18 @@ class SliceWorksApp < Sinatra::Base
       :body => params[:message],
       :port => '587',
       :via => :smtp,
-      :via_options => { 
-        :address              => 'smtp.' + settings.email_service, 
-        :port                 => '587', 
-        :enable_starttls_auto => true, 
-        :user_name            => settings.email_username, 
-        :password             => settings.email_password, 
-        :authentication       => :plain, 
+      :via_options => {
+        :address              => 'smtp.' + settings.email_service,
+        :port                 => '587',
+        :enable_starttls_auto => true,
+        :user_name            => settings.email_username,
+        :password             => settings.email_password,
+        :authentication       => :plain,
         :domain               => settings.email_domain
       })
     redirect '/'
   end
-  
+
   get '/logout' do
     session[:user] = nil
     redirect '/goodbye'
@@ -200,35 +202,20 @@ class SliceWorksApp < Sinatra::Base
   end
 
   get '/:slug' do |slug|
+    contacts = db[:contacts].select.to_a
+
     if slug == "lodo"
-      number = '(303) 297-3464'
+      number         = contacts.last
       erb :capitol_hill, :locals => {:number => number}
     elsif slug == 'capitol_hill'
-      number = '(303) 993-8127'
+      number = contacts.first
       erb :capitol_hill, :locals => {:number => number}
+    elsif slug == 'locations'
+      @capitol_hill = contacts.first
+      @lodo         = contacts.last
+      erb :locations
     else
     erb slug.to_sym
     end
   end
-
-  # get '/admin/locations' do
-  #   @locations = Sequel.get('locations')
-  #   @locations = [{id: 1, name: 'Denver Location', address: '123'},
-  #                 {id: 2, name: 'Littleton Location', address: '456'}]
-  #   erb 'admin/locations'
-  # end
-  #
-  # get '/admin/locations/:id/edit' do |id|
-  #   @location = Sequel.get('location', id)
-  #   erb 'admin/locations/edit'
-  # end
-
-  # post '/admin/locations/:id' do |id|
-  #   @location = Sequal.get('location', id)
-  #
-  #   name = params[:name]
-  #   address = params[:address]
-  #
-  #   Sequal.update('location', id, {name: name, address: address})
-  # end
 end
