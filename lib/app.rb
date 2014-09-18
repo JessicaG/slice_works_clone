@@ -1,4 +1,3 @@
-require 'pony'
 require 'sequel'
 require_relative 'app/menu'
 
@@ -16,12 +15,6 @@ class SliceWorksApp < Sinatra::Base
   set :root, 'lib/app'
   set :views, settings.root + '/views'
   set :public_folder, File.dirname(__FILE__) + '/public'
-
-  set :email_username, ENV['SENDGRID_USERNAME'] || ENV['LOCALHOST_USERNAME']
-  set :email_password, ENV['SENDGRID_PASSWORD'] || ENV['LOCALHOST_PASSWORD']
-  set :email_address, 'daz@gmail.com'
-  set :email_service, ENV['EMAIL_SERVICE'] || 'gmail.com'
-  set :email_domain, ENV['SENDGRID_DOMAIN'] || 'localhost.localdomain'
  
   use Rack::Session::Cookie, :key => 'rack.session',
                              :path => '/',
@@ -156,22 +149,14 @@ class SliceWorksApp < Sinatra::Base
 
   post '/contact' do
     require 'pony'
-     Pony.mail(
-      :from => params[:name] + "<" + params[:email] + ">",
-      :to => settings.email_address,
-      :subject => params[:name] + " has contacted you",
-      :body => params[:message],
-      :port => '587',
-      :via => :smtp,
-      :via_options => {
-        :address              => 'smtp.' + settings.email_service,
-        :port                 => '587',
-        :enable_starttls_auto => true,
-        :user_name            => settings.email_username,
-        :password             => settings.email_password,
-        :authentication       => :plain,
-        :domain               => settings.email_domain
-      })
+    Pony.subject_prefix("Slice Works: ")
+    Pony.mail ({
+      :subject => params[:subject],
+      :from    => params[:mail],
+      :body    => params[:message],
+      :to      => 'lukeaiken@gmail.com',
+      :via     => :sendmail
+    })
     redirect '/'
   end
 
