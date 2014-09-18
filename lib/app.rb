@@ -1,26 +1,31 @@
 require 'sequel'
 
+# require 'dotenv'
+# Dotenv.load
+
 class SliceWorksApp < Sinatra::Base
   attr_reader :db
+
+  class << self
+    attr_accessor :db
+  end
 
   set :method_override, true
   set :root, 'lib/app'
   set :views, settings.root + '/views'
   set :public_folder, File.dirname(__FILE__) + '/public'
 
-  enable :sessions
-
-  class << self
-    attr_accessor :db
-  end
-
+  set :email_username, ENV['SENDGRID_USERNAME'] || ENV['LOCALHOST_USERNAME']
+  set :email_password, ENV['SENDGRID_PASSWORD'] || ENV['LOCALHOST_PASSWORD']
+  set :email_address, 'daz@gmail.com'
+  set :email_service, ENV['EMAIL_SERVICE'] || 'gmail.com'
+  set :email_domain, ENV['SENDGRID_DOMAIN'] || 'localhost.localdomain'
+ 
   before do
     @db = self.class.db
   end
 
   get '/' do
-    people = db[:people].select
-    @person = people.to_a.first
     erb :home, layout: :home_layout
   end
 
@@ -126,18 +131,27 @@ class SliceWorksApp < Sinatra::Base
     redirect '/admin_dashboard'
   end
 
-  post '/contact' do
+  post '/contact' do 
     require 'pony'
-    #Pony.mail(
-    #  from: params[:name]  + "<" + params[:email] + ">",
-    #  to: 'lukeaiken@gmail.com',
-    #  subject: params[:subject],
-    #  body: params[:message],
-    #  port: '587',
-    #  via: :smpt,
-
+     Pony.mail(
+      :from => params[:name] + "<" + params[:email] + ">",
+      :to => settings.email_address,
+      :subject => params[:name] + " has contacted you",
+      :body => params[:message],
+      :port => '587',
+      :via => :smtp,
+      :via_options => { 
+        :address              => 'smtp.' + settings.email_service, 
+        :port                 => '587', 
+        :enable_starttls_auto => true, 
+        :user_name            => settings.email_username, 
+        :password             => settings.email_password, 
+        :authentication       => :plain, 
+        :domain               => settings.email_domain
+      })
+    redirect '/'
   end
-
+  
   get '/logout' do
     session[:user] = nil
     redirect '/goodbye'
