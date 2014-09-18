@@ -1,9 +1,10 @@
 
-<form action='/' method='POST'>
-Menu Item Name:<input type='text'name='menu_item[name]'/><br/>
-Menu Item Price:<input type='text' name='menu_item[price]'/><br/>
-Menu Item Description: <textarea name='menu_item[description]'><br/>
-By the Slice?<input type='checkbox' name='menu_item[slice]'><br/>
+<form action='/edit/<%= @menu_item[:id] %>' method='POST'>
+Menu Item Name:<input type='text' name='name' value= <%= @menu_item[:name] %> /><br/>
+Menu Item Price:<input type='text' name='price' value=<%= @menu_item[:price]%> /><br/>
+Menu Item Description: <textarea name='description'><%= @menu_item[:description] %></textarea><br/>
+By the Slice?<input type='checkbox' name='by_slice' checked=<%= 'checked' if @menu_item[:by_slice]%> /><br/>
 <button type = 'submit' class="btn btn-default btn-sm">
   <span class="glyphicon glyphicon-ok"></span> Save Menu Item
 </button>
+</form>

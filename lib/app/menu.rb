@@ -3,11 +3,6 @@ require 'sequel'
 class Menu
   attr_accessor :database
 
-  def initialize
-    db ||= Sequel.new
-    @database ||= db[:slice_works]
-  end
-
   def categories
     database.map { |x| x[:category] }.uniq
   end

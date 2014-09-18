@@ -1,12 +1,6 @@
-<h2>Editing Gourmet Pizza Items</h2>
-<li>
-  <h3> <%= menu_item[:name] %>
-  <p> <%= menu_item[:description] %>
-  <p> <%= menu_item[:price] %>
-  <p> Admin Options:
-</li>
+<h2>Adding/Editing Gourmet Pizza Items</h2>
   <p>
-    <% if menu_item.id %>
+    <% if @menu_item[:id] %>
       Edit Item:
     <% else %>
       Menu Items:

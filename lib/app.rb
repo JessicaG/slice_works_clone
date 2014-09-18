@@ -15,7 +15,13 @@ class SliceWorksApp < Sinatra::Base
   set :root, 'lib/app'
   set :views, settings.root + '/views'
   set :public_folder, File.dirname(__FILE__) + '/public'
- 
+
+  set :email_username, ENV['SENDGRID_USERNAME'] || ENV['LOCALHOST_USERNAME']
+  set :email_password, ENV['SENDGRID_PASSWORD'] || ENV['LOCALHOST_PASSWORD']
+  set :email_address, 'daz@gmail.com'
+  set :email_service, ENV['EMAIL_SERVICE'] || 'gmail.com'
+  set :email_domain, ENV['SENDGRID_DOMAIN'] || 'localhost.localdomain'
+
   use Rack::Session::Cookie, :key => 'rack.session',
                              :path => '/',
                              :secret => 'love'
@@ -30,6 +36,8 @@ class SliceWorksApp < Sinatra::Base
 
   get '/' do
     contacts = db[:contacts].select.to_a
+    menu_items = db[:menu_items].select.to_a
+    @menu_items = menu_items.first
     @capitol_hill = contacts.first
     @lodo         = contacts.last
     erb :home, layout: :home_layout
@@ -104,12 +112,23 @@ class SliceWorksApp < Sinatra::Base
     end
   end
 
+  get '/happy-hour/' do
+    erb :happy_hour_menu
+  end
+
+  get '/catering/' do
+    erb :catering_menu
+  end
+
+  get '/menu/dine_in' do
+    erb :dine_in
+  end
+
   get '/admin/pages/edit_contacts' do
-    number = db[:contacts].select
-    @lodo_number = number.first
-    # @number = "(303)&nbsp;993-8127"
-    # login_helper(:edit_contacts)
-    erb :edit_contacts
+    number = db[:contacts].select.to_a
+    @lodo_number = number.last
+    @capitol_hill_number = number.first
+    login_helper(:edit_contacts)
   end
 
   ###LogIn and CMS Functionality###
@@ -118,19 +137,24 @@ class SliceWorksApp < Sinatra::Base
     login_helper(:admin_dashboard)
   end
 
-  get '/edit_menu' do
+  get '/new' do
     @menu_item = {}
     login_helper(:edit)
   end
 
+  get '/menu_items' do
+    @menu_items = db[:gourmet_pizza_items].to_a
+    login_helper(:menu_items)
+  end
+
   get '/edit/:item_id' do |item_id|
-    @menu_item = db["select * from gourmet_pizza_items where id=#{item_id}"].to_a.first
-    login_helper(:form, {item_id: item_id})
+    @menu_item = db["select * from gourmet_pizza_items where id='#{item_id}'"].to_a.first
+    login_helper(:edit, {item_id: item_id})
   end
 
   post '/edit/:item_id' do |item_id|
-    Menu.new.edit(item_id, params) if authenticated?
-    redirect '/admin_dashboard'
+    db.run("update gourmet_pizza_items set name='#{params[:name]}', description='#{params[:description]}', price='#{params[:price]}', by_slice='#{params[:by_slice]}' where id='#{item_id}'")
+    redirect "/edit/#{item_id}"
   end
 
   get '/delete/:item_id' do |item_id|
@@ -179,11 +203,17 @@ class SliceWorksApp < Sinatra::Base
 
     def login_helper(view, locals = {})
       if authenticated?
-        erb :admin_dashboard
+        erb view
       else
         redirect '/log_in'
       end
     end
+  end
+
+  post '/phone_number' do
+    db.run("update contacts set number = '#{params[:lodo_number]}' where location = 'LODO'")
+    db.run("update contacts set number = '#{params[:capitol_hill_number]}' where location = 'Capitol Hill'")
+    redirect '/admin_dashboard'
   end
 
   get '/:slug' do |slug|
@@ -200,6 +230,8 @@ class SliceWorksApp < Sinatra::Base
       @lodo         = contacts.last
       erb :locations
     else
+      @capitol_hill = contacts.first
+      @lodo         = contacts.last
     erb slug.to_sym
     end
   end
