@@ -22,7 +22,7 @@ class SliceWorksApp < Sinatra::Base
   set :email_address, 'daz@gmail.com'
   set :email_service, ENV['EMAIL_SERVICE'] || 'gmail.com'
   set :email_domain, ENV['SENDGRID_DOMAIN'] || 'localhost.localdomain'
- 
+
   use Rack::Session::Cookie, :key => 'rack.session',
                              :path => '/',
                              :secret => 'love'
@@ -222,6 +222,8 @@ class SliceWorksApp < Sinatra::Base
       @lodo         = contacts.last
       erb :locations
     else
+      @capitol_hill = contacts.first
+      @lodo         = contacts.last
     erb slug.to_sym
     end
   end
