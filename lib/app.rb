@@ -1,14 +1,27 @@
 require 'sequel'
+require_relative 'app/menu'
 
 class SliceWorksApp < Sinatra::Base
   attr_reader :db
+
+  class << self
+    attr_accessor :db
+  end
 
   set :method_override, true
   set :root, 'lib/app'
   set :views, settings.root + '/views'
   set :public_folder, File.dirname(__FILE__) + '/public'
 
-  enable :sessions
+  set :email_username, ENV['SENDGRID_USERNAME'] || ENV['LOCALHOST_USERNAME']
+  set :email_password, ENV['SENDGRID_PASSWORD'] || ENV['LOCALHOST_PASSWORD']
+  set :email_address, 'daz@gmail.com'
+  set :email_service, ENV['EMAIL_SERVICE'] || 'gmail.com'
+  set :email_domain, ENV['SENDGRID_DOMAIN'] || 'localhost.localdomain'
+
+  use Rack::Session::Cookie, :key => 'rack.session',
+                             :path => '/',
+                             :secret => 'love'
 
   class << self
     attr_accessor :db
@@ -81,16 +94,16 @@ class SliceWorksApp < Sinatra::Base
     redirect to('/pages')
   end
 
-  get '/login' do
-    haml :login
+  get '/log_in' do
+    erb :log_in
   end
 
-  post '/login' do
+  post '/log_in' do
     authenticate!
     if session[:user] == "admin"
       redirect '/admin_dashboard'
     else
-      redirect '/login'
+      redirect '/log_in'
     end
   end
 
@@ -109,10 +122,12 @@ class SliceWorksApp < Sinatra::Base
   end
 
   get '/edit_menu' do
-    login_helper(:admin_menu)
+    @menu_item = {}
+    login_helper(:edit)
   end
 
   get '/edit/:item_id' do |item_id|
+    @menu_item = db["select * from gourmet_pizza_items where id=#{item_id}"].to_a.first
     login_helper(:form, {item_id: item_id})
   end
 
@@ -127,7 +142,7 @@ class SliceWorksApp < Sinatra::Base
   end
 
   get '/add_menu_item' do
-    haml :add_form
+    erb :add_form
   end
 
   post '/add' do
@@ -137,14 +152,23 @@ class SliceWorksApp < Sinatra::Base
 
   post '/contact' do
     require 'pony'
-    #Pony.mail(
-    #  from: params[:name]  + "<" + params[:email] + ">",
-    #  to: 'lukeaiken@gmail.com',
-    #  subject: params[:subject],
-    #  body: params[:message],
-    #  port: '587',
-    #  via: :smpt,
-
+     Pony.mail(
+      :from => params[:name] + "<" + params[:email] + ">",
+      :to => settings.email_address,
+      :subject => params[:name] + " has contacted you",
+      :body => params[:message],
+      :port => '587',
+      :via => :smtp,
+      :via_options => {
+        :address              => 'smtp.' + settings.email_service,
+        :port                 => '587',
+        :enable_starttls_auto => true,
+        :user_name            => settings.email_username,
+        :password             => settings.email_password,
+        :authentication       => :plain,
+        :domain               => settings.email_domain
+      })
+    redirect '/'
   end
 
   get '/logout' do
@@ -155,7 +179,7 @@ class SliceWorksApp < Sinatra::Base
   ###Authentication Helpers###
   helpers do
     def authenticate!
-      if params[:user] == "admin" && params[:password] == "password"
+      if params[:user] == "admin" && params[:password] == "ilovepizza"
         session[:user] = "admin"
       end
     end
@@ -166,7 +190,7 @@ class SliceWorksApp < Sinatra::Base
 
     def login_helper(view, locals = {})
       if authenticated?
-        haml view, locals: locals
+        erb :admin_dashboard
       else
         redirect '/log_in'
       end
@@ -193,25 +217,4 @@ class SliceWorksApp < Sinatra::Base
     erb slug.to_sym
     end
   end
-
-  # get '/admin/locations' do
-  #   @locations = Sequel.get('locations')
-  #   @locations = [{id: 1, name: 'Denver Location', address: '123'},
-  #                 {id: 2, name: 'Littleton Location', address: '456'}]
-  #   erb 'admin/locations'
-  # end
-  #
-  # get '/admin/locations/:id/edit' do |id|
-  #   @location = Sequel.get('location', id)
-  #   erb 'admin/locations/edit'
-  # end
-
-  # post '/admin/locations/:id' do |id|
-  #   @location = Sequal.get('location', id)
-  #
-  #   name = params[:name]
-  #   address = params[:address]
-  #
-  #   Sequal.update('location', id, {name: name, address: address})
-  # end
 end
